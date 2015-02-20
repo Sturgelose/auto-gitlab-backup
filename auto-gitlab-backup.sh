@@ -128,6 +128,11 @@ configBackup() {
 	
 }
 
+hostKeysBackup() {
+	tar -cf $gitRakeBackups/host-ssh.tar /etc/ssh
+
+}
+
 printScriptver() {
 	# print the most recent tag
 	echo "This is $0"
@@ -155,6 +160,7 @@ else
 	echo "No confFile found; Remote copy DISABLED."
 fi
 
+hostKeysBackup
 configBackup
 rakeBackup
 checkSize
