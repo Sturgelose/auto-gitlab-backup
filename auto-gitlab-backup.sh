@@ -122,13 +122,15 @@ sshQuota() {
 configBackup() {
 #package config files into a tar.gz
 	sudo sh -c 'umask 0077; tar -cf $gitRakeBackups/gitlab-config.tar -C / etc/gitlab'
+	echo "$gitRakeBackups/gitlab-config.tar"
+	echo "sudo sh -c 'umask 0077; tar -cf $gitRakeBackups/gitlab-config.tar -C / etc/gitlab'"
 	
 }
 
 printScriptver() {
 	# print the most recent tag
 	echo "This is $0"
-	echo "Version $(git describe --abbrev=0 --tags), commit #$(git log --pretty=format:'%h' -n 1)."
+	echo "Version $(git describe --abbrev=0 --tags --always), commit #$(git log --pretty=format:'%h' -n 1)."
 }
 
 ###
