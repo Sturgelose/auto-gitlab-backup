@@ -124,7 +124,7 @@ configBackup() {
 	sudo sh -c 'umask 0077; tar -cf $gitRakeBackups/gitlab-config.tar -C / etc/gitlab'
 	echo "$gitRakeBackups/gitlab-config.tar"
 	umask 0077; 
-	tar -cf $gitRakeBackups/gitlab-config.tar -C /etc/gitlab
+	tar -cf $gitRakeBackups/gitlab-config.tar /etc/gitlab
 	
 }
 
