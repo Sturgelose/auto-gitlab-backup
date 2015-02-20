@@ -36,7 +36,6 @@
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
 #
 gitHome="$(awk -F: -v v="git" '{if ($1==v) print $6}' /etc/passwd)"
-gitlabHome="$gitHome/gitlab"
 gitlab_rails="/opt/gitlab/embedded/service/gitlab-rails"
 gitRakeBackups="/var/opt/gitlab/backups"
 PDIR=$(dirname $(readlink -f $0))
@@ -120,6 +119,12 @@ sshQuota() {
 	fi
 }
 
+configBackup() {
+#package config files into a tar.gz
+	sudo sh -c 'umask 0077; tar -cf $gitRakeBackups/gitlab-config.tar -C / etc/gitlab'
+	
+}
+
 printScriptver() {
 	# print the most recent tag
 	echo "This is $0"
@@ -147,6 +152,7 @@ else
 	echo "No confFile found; Remote copy DISABLED."
 fi
 
+configBackup
 rakeBackup
 checkSize
 
